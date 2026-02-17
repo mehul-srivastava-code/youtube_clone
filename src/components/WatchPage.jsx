@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { classMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
@@ -13,19 +13,16 @@ const WatchPage = () => {
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("v"));
 
-  const getVideoDetails = async () => {
+  const getVideoDetails = useCallback(async () => {
     const data = await fetch(
       `${YOUTUBE_GET_VIDEO_BY_ID}${searchParams.get("v")}&key=${GOOGLE_API_KEY}`
     );
     const result = await data.json();
     console.log(result?.items[0]);
     setVideoData(result?.items[0]);
-  };
+  }, [searchParams]);
 
-  useEffect(() => {
-    dispatch(classMenu());
-    getVideoDetails();
-  }, []);
+  useEffect(() => { dispatch(classMenu()); getVideoDetails(); }, [dispatch, getVideoDetails]);
   return (
     <div className=" flex  flex-col   justify-start  w-full   p-4  gap-2">
       <div className="flex flex-col md:flex-row w-full gap-1 border  ">
