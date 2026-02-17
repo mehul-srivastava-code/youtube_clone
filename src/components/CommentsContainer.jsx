@@ -1,5 +1,4 @@
 import React from "react";
-import { USER_ICON_URL } from "../utils/constants";
 
 const commentsData = [
   {
@@ -45,7 +44,7 @@ const commentsData = [
   },
 ];
 export const Comment = ({ data }) => {
-  const { text, name, replies } = data;
+  const { text, name } = data;
   return (
     <div className="px-1 flex  bg-gray-200 rounded-lg items-center gap-2">
       <img
@@ -63,7 +62,7 @@ export const Comment = ({ data }) => {
 
 export const CommentList = ({ comments }) => {
   return comments.map((comment) => (
-    <div className="flex flex-col gap-y-2 ">
+    <div className="flex flex-col gap-y-2 " key={comment?.id}>
       <div>
         <Comment data={comment} key={comment?.id} />
       </div>

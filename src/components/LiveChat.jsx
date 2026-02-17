@@ -19,7 +19,7 @@ const LiveChat = () => {
     }, 1500);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [dispatch]);
   const sendChatMessage = (e) => {
     e.preventDefault();
     if (chatMessage.length > 0) {

@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  GOOGLE_API_KEY,
-  YOUTUBE_GET_VIDEO_BY_ID,
-  kFormatter,
-  numFormatter,
-} from "../utils/constants";
+import React from "react";
+import { numFormatter } from "../utils/constants";
 import moment from "moment/moment";
 
 const VideoCard = ({

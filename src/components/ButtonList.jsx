@@ -4,9 +4,8 @@ import Button from "./Button";
 // Import Swiper styles
 
 import "swiper/css/bundle";
-import Slider from "./Slider";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { GOOGLE_API_KEY, YOUTUBE_SEARCH_RESULTS_API } from "../utils/constants";
 import { getSearchSuggestionData } from "../utils/searchSlice";
 const ButtonList = () => {

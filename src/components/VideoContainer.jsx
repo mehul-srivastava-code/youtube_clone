@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { YOUTUBE_POPULAR_VIDEOS } from "../utils/constants";
-import VideoCard, { AddVideoCard } from "./VideoCard";
+import VideoCard from "./VideoCard";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideos } from "../utils/searchSlice";
@@ -13,17 +13,17 @@ const VideoContainer = () => {
   const searchVideos = useSelector(
     (store) => store.search.searchSuggestionData
   );
-  const getPopularVideos = async () => {
+  const getPopularVideos = useCallback(async () => {
     const data = await fetch(YOUTUBE_POPULAR_VIDEOS);
     const result = await data.json();
     dispatch(getVideos(result?.items));
 
     console.log(result?.items);
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     getPopularVideos();
-  }, []);
+  }, [getPopularVideos]);
   console.log(searchVideos);
 
   const [searchParams] = useSearchParams();

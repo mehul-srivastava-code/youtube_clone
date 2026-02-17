@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { SiYoutube } from "react-icons/si";
 import { BiVideoPlus } from "react-icons/bi";
@@ -8,9 +8,6 @@ import { MdOutlineClear } from "react-icons/md";
 
 import { IoMdNotificationsOutline } from "react-icons/io";
 import {
-  HAMBURGER_URL,
-  USER_ICON_URL,
-  YOUTUBE_ICON_URL,
   YOUTUBE_SEARCH_API,
   GOOGLE_API_KEY,
   YOUTUBE_SEARCH_RESULTS_API,
@@ -23,7 +20,7 @@ import {
   getSearchSuggestionData,
   getSearchSuggestionQuery,
 } from "../utils/searchSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const searchQuery1 = useSelector((store) => store.search.searchQuery);
@@ -38,7 +35,7 @@ const Header = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
-  const getSearchSuggestions = async () => {
+  const getSearchSuggestions = useCallback(async () => {
     try {
       if (searchQuery1.length > 0) {
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery1);
@@ -48,7 +45,7 @@ const Header = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [dispatch, searchQuery1]);
 
   // const getVideosByCORS = async () => {
   //   try {
@@ -85,7 +82,7 @@ const Header = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [searchQuery1]);
+  }, [getSearchSuggestions]);
 
   // const handleResultOnClick = (i) => {
   //   console.log(searchSuggestionList[i], "world");

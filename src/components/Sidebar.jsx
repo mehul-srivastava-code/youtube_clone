@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import store from "../utils/store";
 import { Link } from "react-router-dom";
 import { GiCancel } from "react-icons/gi";
 
-import { YOUTUBE_ICON_URL, sidebarData } from "../utils/constants";
-import { classMenu, toggleMenu } from "../utils/appSlice";
+import { sidebarData } from "../utils/constants";
+import { toggleMenu } from "../utils/appSlice";
 import { SiYoutube } from "react-icons/si";
 
 const Sidebar = () => {
